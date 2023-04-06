@@ -103,7 +103,7 @@ resource "aws_lambda_function" "s3_copy_function" {
   function_name = "${var.env_name}_s3_copy_lambda"
   role          = "${aws_iam_role.s3_copy_function.arn}"
   handler       = "hello.handler"
-  runtime       = "python3.6"
+  runtime       = "python3.7"
 }
 
 resource "aws_s3_bucket" "source_bucket" {
