@@ -106,13 +106,14 @@ resource "aws_lambda_function" "s3_copy_function" {
   runtime       = "python3.7"
 }
 
-resource "aws_s3_bucket" "source_bucket" {
-    bucket = "${var.env_name}-src-bucket"
-    force_destroy = true 
-}
+#resource "aws_s3_bucket" "source_bucket" {
+#    bucket = "${var.env_name}-src-bucket"
+#    force_destroy = true 
+#}
 
 resource "aws_s3_bucket_notification" "bucket_terraform_notification" {
-  bucket = "${aws_s3_bucket.source_bucket.id}"
+  #bucket = "${aws_s3_bucket.source_bucket.id}"
+  bucket = "test-cloud-hackathon-src-bucket"
   lambda_function {
         lambda_function_arn = "${aws_lambda_function.s3_copy_function.arn}"
         events              = ["s3:ObjectCreated:*"]
@@ -121,6 +122,6 @@ resource "aws_s3_bucket_notification" "bucket_terraform_notification" {
 
 }
 
-output "source-s3-bucket" {
-    value = "${aws_s3_bucket.source_bucket.id}"
-}
+#output "source-s3-bucket" {
+#    value = "${aws_s3_bucket.source_bucket.id}"
+#}
